@@ -9,7 +9,7 @@
 import express from "express";
 import path from "path";
 
-import Users from "./Users.js";
+import Users from "./Controllers/Users.js";
 
 const {APP_PORT} = process.env;
 const app = express();
