@@ -6,12 +6,25 @@ class Ajoututilisateur extends Component {
         this.state = {
             login: "",
             email: "",
+            password: "",
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange() {
+        // login = this.state.login,
+        // password = this.state.password,
+        // email = this.state.email
+        // console.log(login)
     }
 
     handleSubmit(event) {
-        console.log(`A name login submitted: ${this.state.value}`);
+        console.log(
+            `A new user was submitted: ${this.state.login} + ${
+                this.state.email
+            } + ${this.state.password}`,
+        );
         event.preventDefault();
     }
 
@@ -21,12 +34,35 @@ class Ajoututilisateur extends Component {
                 <h1>{"Ajouter / Editer un nouvel utilisateur"}</h1>
 
                 <hr />
-                <form onSubmit={this.handleSubmit}>
-                    {/* <label htmlFor="login">{"Login"}</label> */}
-                    <input value={this.state.login} required />
+                <form onSubmit={() => this.handleSubmit()}>
+                    <input
+                        value={this.state.login}
+                        name="login"
+                        required
+                        placeholder="Login"
+                        onChange={this.handleChange()}
+                    />
 
-                    {/* <label htmlFor="email">{"Email"}</label> */}
-                    <input type="email" value={this.state.email} required />
+                    <input
+                        type="email"
+                        value={this.state.email}
+                        required
+                        name="email"
+                        placeholder="Email"
+                        onChange={this.handleChange()}
+                    />
+
+                    <input
+                        type="password"
+                        value={this.state.password}
+                        name="password"
+                        required
+                        placeholder="Password"
+                        onChange={this.handleChange()}
+                    />
+                    <hr />
+                    <label htmlFor="coach">{"Coach ?"}</label>
+                    <input type="checkbox" id="coach" name="coach" />
 
                     <input type="submit" value="Envoyer" />
                 </form>
@@ -36,39 +72,3 @@ class Ajoututilisateur extends Component {
 }
 
 export default Ajoututilisateur;
-
-// class NameForm extends React.Component {
-//     constructor(props) {
-//       super(props);
-//       this.state = {value: ''};
-
-//       this.handleChange = this.handleChange.bind(this);
-//       this.handleSubmit = this.handleSubmit.bind(this);
-//     }
-
-//     handleChange(event) {
-//       this.setState({value: event.target.value});
-//     }
-
-//     handleSubmit(event) {
-//       console.log('A name was submitted: ' + this.state.value);
-//       event.preventDefault();
-//     }
-
-//     render() {
-//       return (
-//         <form onSubmit={this.handleSubmit}>
-//           <label>
-//             Name:
-//             <input type="text" value={this.state.value} onChange={this.handleChange} />
-//           </label>
-//           <input type="submit" value="Submit" />
-//         </form>
-//       );
-//     }
-//   }
-
-//   ReactDOM.render(
-//     <NameForm />,
-//     document.getElementById('root')
-//   );
