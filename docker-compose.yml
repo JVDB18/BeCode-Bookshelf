@@ -6,6 +6,11 @@
       environment:
         NODE_ENV: "development"
         APP_PORT: 12345
+        DB_NAME: "bookshelf"
+        DB_USERNAME: "dev"
+        DB_PASSWORD: "dev"
+        DB_URL: "mongo"
+        DB_PORT: "27017"
       volumes:
         - "./package.json:/src/app/package.json"
         - "./node_modules:/src/app/node_modules"

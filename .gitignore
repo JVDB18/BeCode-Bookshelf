@@ -61,6 +61,3 @@ typings/
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
-
-# database credentials
-.config.js

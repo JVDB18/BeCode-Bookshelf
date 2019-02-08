@@ -6,12 +6,6 @@
  * started at 18/01/2019
  */
 
-process.env.databaseName = "test_bookshelf";
-process.env.databaseUsername = "dev";
-process.env.databasePassword = "dev";
-process.env.databaseUrl = "mongo";
-process.env.databasePort = "27017";
-
 import express from "express";
 import path from "path";
 import assert from "assert";
@@ -22,24 +16,36 @@ const MongoClient = require("mongodb").MongoClient;
 
 let db = null;
 
-// Connect to database
+console.log(process.env.DB_NAME);
+
 (async function() {
-    const dbName = process.env.databaseName;
-    const url = `mongodb://${process.env.databaseUsername}:${
-        process.env.databasePassword
-    }@${process.env.databaseUrl}:${process.env.databasePort}`;
-    const client = new MongoClient(url, {useNewUrlParser: true});
+    /*
+     * Connect to database & keep connection alive
+     * No return value
+     * Saves connection to db variable
+     */
+
+    const dbName = process.env.DB_NAME; // Name of the database we want to use
+    const url = `mongodb://${process.env.DB_USERNAME}:${
+        process.env.DB_PASSWORD
+    }@${process.env.DB_URL}:${process.env.DB_PORT}`; // URL with credentials used to connect to database
+    const client = new MongoClient(url, {useNewUrlParser: true}); // Connection instance
 
     try {
+        // Wait for connection to be established
         await client.connect();
+        // Print success in server console
         console.log("Connected successfully to server");
+        // Save connection for further requests
         db = client.db(dbName);
     } catch (error) {
+        // If connection failed
+        // Print error in server console
         console.error(error);
     }
 
     /*
-     * Avoid closing connection - we want to keep it alive for our requests (and it raises crash notice from NODEMON)
+     * Avoid closing connection - we want to keep it alive for our requests (plus, NODEMON, throws an application crash notice if we do so)
      */
     // client.close();
     // console.log( 'Disconnected from server' );
@@ -55,15 +61,22 @@ app.get("/hello", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
-    console.log("This is /users route");
-    // get users from database
-    db.collection("users")
-        .find({})
+    /*
+     * Get all users
+     * Return JSON with all users
+     */
+
+    // Print method & route in server console
+    console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
+
+    // Get datas from database
+    db.collection("users") // Collection (equivalent to MySQL's Table) we want to get informations from
+        .find({}) // Datas we want to collect (empty object being shorthand for "no specificity" => "find all")
         .toArray((err, result) => {
             // Check if errors getting datas
             assert.equal(null, err);
 
-            // send users in JSON format
+            // Send datas in JSON format
             res.send(JSON.stringify(result));
         });
 });
