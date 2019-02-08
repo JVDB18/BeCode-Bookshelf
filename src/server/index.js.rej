@@ -1,0 +1,4 @@
+diff a/src/server/index.js b/src/server/index.js	(rejected hunks)
+@@ -19 +19 @@ let db = null;
+-console.log( process.env.DB_NAME );
++console.log(process.env.DB_NAME);

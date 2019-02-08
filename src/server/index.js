@@ -16,8 +16,6 @@ const MongoClient = require("mongodb").MongoClient;
 
 let db = null;
 
-console.log(process.env.DB_NAME);
-
 (async function() {
     /*
      * Connect to database & keep connection alive
