@@ -7,15 +7,28 @@
  */
 
 import * as React from "react";
+import Ajoututilisateur from "./ajoututilisateur.js";
 
 export default class HelloWorld extends React.Component {
+    //     render() {
+    //         return (
+    //             <div>
+    //                 <h1>{"Hello, world, it's so good to see you!"}</h1>
+    //                 <hr />
+    //                 <small>{"becode/bookshelf"}</small>
+    //             </div>
+
+    //         );
+    //     }
+    // }
+
     render() {
         return (
             <div>
-                <h1>{"Hello, world!"}</h1>
-                <hr />
-                <small>{"becode/bookshelf"}</small>
+                <Ajoututilisateur />
             </div>
         );
     }
 }
+
+// export default HelloWorld;
