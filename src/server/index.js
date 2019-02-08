@@ -8,7 +8,8 @@
 
 import express from "express";
 import path from "path";
-import assert from "assert";
+
+import Users from "./Users.js";
 
 const {APP_PORT} = process.env;
 const app = express();
@@ -59,24 +60,7 @@ app.get("/hello", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
-    /*
-     * Get all users
-     * Return JSON with all users
-     */
-
-    // Print method & route in server console
-    console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
-
-    // Get datas from database
-    db.collection("users") // Collection (equivalent to MySQL's Table) we want to get informations from
-        .find({}) // Datas we want to collect (empty object being shorthand for "no specificity" => "find all")
-        .toArray((err, result) => {
-            // Check if errors getting datas
-            assert.equal(null, err);
-
-            // Send datas in JSON format
-            res.send(JSON.stringify(result));
-        });
+    Users.index(db, req, res);
 });
 
 app.listen(APP_PORT, () =>
