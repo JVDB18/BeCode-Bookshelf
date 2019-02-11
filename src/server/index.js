@@ -44,7 +44,7 @@ let db = null;
     }
 
     /*
-     * Avoid closing connection - we want to keep it alive for our requests (plus, NODEMON, throws an application crash notice if we do so)
+     * Avoid closing connection - we want to keep it alive for our requests (plus, NODEMON throws an app crash notice if we do so)
      */
     // client.close();
     // console.log( 'Disconnected from server' );

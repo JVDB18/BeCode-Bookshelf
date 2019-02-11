@@ -35,4 +35,36 @@ export default class Users {
                 response.send(JSON.stringify(result));
             });
     }
+
+    static show() {
+        //
+    }
+
+    static create() {
+        //
+    }
+
+    static store() {
+        //
+    }
+
+    static edit() {
+        //
+    }
+
+    static update() {
+        //
+    }
+
+    static delete() {
+        //
+    }
+
+    static login() {
+        //
+    }
+
+    static logout() {
+        //
+    }
 }
