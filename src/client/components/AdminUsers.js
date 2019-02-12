@@ -8,7 +8,7 @@ export default class AdminUsers extends React.Component {
     render() {
         return (
             <div>
-                I'M ADMIN COMPONENT
+                I'M ADMIN COMPONENTs
                 <NavLink to="/admin/add">Add User</NavLink>
                 <Route path="/admin/add" component={UsersCrudModal} />
                 <Route path="/admin/edit" component={UsersCrudModal} />
