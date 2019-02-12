@@ -4,28 +4,12 @@ class Ajoututilisateur extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            login: "",
-            email: "",
-            password: "",
+            login: "your login",
+            email: "yourEmail@something.com",
+            password: "pswd lol",
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
 
-    handleChange() {
-        // login = this.state.login,
-        // password = this.state.password,
-        // email = this.state.email
-        // console.log(login)
-    }
-
-    handleSubmit(event) {
-        console.log(
-            `A new user was submitted: ${this.state.login} + ${
-                this.state.email
-            } + ${this.state.password}`,
-        );
-        event.preventDefault();
+        this.changeText = this.changeText.bind(this);
     }
 
     render() {
@@ -34,13 +18,13 @@ class Ajoututilisateur extends Component {
                 <h1>{"Ajouter / Editer un nouvel utilisateur"}</h1>
 
                 <hr />
-                <form onSubmit={() => this.handleSubmit()}>
+                <form>
                     <input
                         value={this.state.login}
                         name="login"
                         required
-                        placeholder="Login"
-                        onChange={this.handleChange()}
+                        // placeholder="Login"
+                        onChange={this.changeText}
                     />
 
                     <input
@@ -49,7 +33,7 @@ class Ajoututilisateur extends Component {
                         required
                         name="email"
                         placeholder="Email"
-                        onChange={this.handleChange()}
+                        onChange={this.changeText}
                     />
 
                     <input
@@ -58,7 +42,7 @@ class Ajoututilisateur extends Component {
                         name="password"
                         required
                         placeholder="Password"
-                        onChange={this.handleChange()}
+                        onChange={this.changeText}
                     />
                     <hr />
                     <label htmlFor="coach">{"Coach ?"}</label>
@@ -69,6 +53,13 @@ class Ajoututilisateur extends Component {
             </div>
         );
     }
+
+    changeText = event => {
+        console.log("okok");
+        this.setState({
+            login: event.target.value,
+        });
+    };
 }
 
 export default Ajoututilisateur;
