@@ -138,14 +138,19 @@ router.delete("/:user", (req, res) => {
     // Users Delete
     console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
 
-    Users.deleteOne({_id: req.params.user}, error => {
+    Users.findOneAndDelete({_id: req.params.user}, (error, result) => {
         if (error) {
             console.error(error);
             res.send(error);
         }
 
-        console.log("User deleted from database");
-        res.send("User deleted from database");
+        if (result === null) {
+            console.error("User not found");
+            res.send("User not found");
+        }
+
+        console.log(`${result.pseudo} deleted from database`);
+        res.send(`${result.pseudo} deleted from database`);
     });
 });
 

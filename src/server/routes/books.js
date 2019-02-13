@@ -70,4 +70,75 @@ router.post("/", (req, res) => {
         });
 });
 
+router.get("/:book/edit", (req, res) => {
+    // Books Edit
+    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/books${req.url}`);
+
+    Books.findOne({_id: req.params.book})
+        .then(book => {
+            res.json(book);
+        })
+        .catch(error => {
+            console.error(error);
+            res.send(error);
+        });
+});
+
+router.put("/:book", (req, res) => {
+    // Book Update
+    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/books${req.url}`);
+
+    if (!req.body.title || !req.body.author || !req.body.isbn) {
+        console.log("Missing informations to update book");
+        res.send("Missing informations to update book");
+    }
+
+    const book = {
+        title: req.body.title,
+        author: req.body.author,
+        isbn: req.body.isbn,
+        language: req.body.language ? req.body.language : null,
+        format: req.body.format ? req.body.format : null,
+        updated_at: Date.now(),
+    };
+
+    const options = {
+        new: true,
+    };
+
+    Books.findOneAndUpdate(
+        {_id: req.params.book},
+        book,
+        options,
+        (error, result) => {
+            if (error) {
+                console.error(error);
+                res.send(error);
+            }
+            console.log(`\"${result.title}\" updated in database`);
+            res.json(result);
+        },
+    );
+});
+
+router.delete("/:book", (req, res) => {
+    // Users Delete
+    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/books${req.url}`);
+
+    Books.findOneAndDelete({_id: req.params.book}, (error, result) => {
+        if (error) {
+            console.error(error);
+            res.send(error);
+        }
+
+        if (result === null) {
+            console.error("Book not found");
+            res.send("Book not found");
+        }
+
+        console.log(`\"${result.title}\" deleted from database`);
+        res.send(`\"${result.title}\" deleted from database`);
+    });
+});
+
 module.exports = router;
