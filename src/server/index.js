@@ -18,6 +18,7 @@ const app = express();
 // Import App Routers
 const usersRouter = require("./routes/users.js");
 const booksRouter = require("./routes/books.js");
+const reviewsRouter = require("./routes/reviews.js");
 
 /*
  * Connection to database
@@ -49,6 +50,7 @@ app.use(express.urlencoded());
 // Routing middlewares
 app.use("/api/users", usersRouter);
 app.use("/api/books", booksRouter);
+app.use("/api/reviews", reviewsRouter);
 
 // Authentication middlewares
 

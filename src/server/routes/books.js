@@ -47,6 +47,7 @@ router.post("/", (req, res) => {
     if (!req.body.title || !req.body.author || !req.body.isbn) {
         console.log("Missing informations to create book");
         res.send("Missing informations to create book");
+        return;
     }
 
     const book = {
@@ -91,6 +92,7 @@ router.put("/:book", (req, res) => {
     if (!req.body.title || !req.body.author || !req.body.isbn) {
         console.log("Missing informations to update book");
         res.send("Missing informations to update book");
+        return;
     }
 
     const book = {
@@ -114,6 +116,7 @@ router.put("/:book", (req, res) => {
             if (error) {
                 console.error(error);
                 res.send(error);
+                return;
             }
             console.log(`\"${result.title}\" updated in database`);
             res.json(result);
@@ -129,11 +132,13 @@ router.delete("/:book", (req, res) => {
         if (error) {
             console.error(error);
             res.send(error);
+            return;
         }
 
         if (result === null) {
             console.error("Book not found");
             res.send("Book not found");
+            return;
         }
 
         console.log(`\"${result.title}\" deleted from database`);

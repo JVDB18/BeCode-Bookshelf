@@ -57,6 +57,7 @@ router.post("/", (req, res) => {
     ) {
         console.log("Missing informations to create user");
         res.send("Missing informations to create user");
+        return;
     }
 
     const user = {
@@ -100,6 +101,7 @@ router.put("/:user", (req, res) => {
     if (!req.body.pseudo || !req.body.isCoach || !req.body.email) {
         console.log("Missing informations to update user");
         res.send("Missing informations to update user");
+        return;
     }
 
     let user = {
@@ -142,11 +144,13 @@ router.delete("/:user", (req, res) => {
         if (error) {
             console.error(error);
             res.send(error);
+            return;
         }
 
         if (result === null) {
             console.error("User not found");
             res.send("User not found");
+            return;
         }
 
         console.log(`${result.pseudo} deleted from database`);
