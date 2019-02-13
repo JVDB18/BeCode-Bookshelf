@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-no-literals */
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 
-export default class UsersCrudModal extends React.Component {
+export default class UsersCreate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +23,7 @@ export default class UsersCrudModal extends React.Component {
     render() {
         return (
             <div>
-                <h1>{"Ajouter / Editer un nouvel utilisateur"}</h1>
+                <h1>{"Ajouter un nouvel utilisateur"}</h1>
 
                 <hr />
                 <form onSubmit={this.onSubmit}>
@@ -106,15 +106,15 @@ export default class UsersCrudModal extends React.Component {
             }, and ${this.state.checked}`,
         );
 
-        const obj = {
-            login: this.state.login,
-            email: this.state.email,
-            password: this.state.password,
-        };
+        // const obj = {
+        //     login: this.state.login,
+        //     email: this.state.email,
+        //     password: this.state.password,
+        // };
 
-        axios
-            .post("localhost:8080/admin/add", obj)
-            .then(res => console.log(res.data));
+        // axios
+        //     .post("localhost:8080/admin/add", obj)
+        //     .then(res => console.log(res.data));
 
         this.setState({
             login: "",
