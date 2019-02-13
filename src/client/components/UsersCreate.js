@@ -113,7 +113,7 @@ export default class UsersCreate extends React.Component {
         // };
 
         // axios
-        //     .post("localhost:8080/admin/add", obj)
+        //     .post("localhost:8080/api/users", obj)
         //     .then(res => console.log(res.data));
 
         this.setState({
