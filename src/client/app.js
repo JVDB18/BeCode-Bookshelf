@@ -8,7 +8,16 @@
 
 import * as React from "react";
 import ReactDOM from "react-dom";
+import {BrowserRouter} from "react-router-dom";
+import Routes from "./components/Routes";
+import Nav from "./components/NavLinks";
 
-import HelloWorld from "./components/hello";
-
-ReactDOM.render(<HelloWorld />, document.querySelector("#app"));
+ReactDOM.render(
+    <BrowserRouter>
+        <div>
+            <Nav />
+            <Routes />
+        </div>
+    </BrowserRouter>,
+    document.querySelector("#app"),
+);
