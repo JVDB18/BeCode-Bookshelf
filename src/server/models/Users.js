@@ -1,6 +1,6 @@
 /* becodeorg/bookshelf
  *
- * /src/server/Users.js - Users Controller
+ * /src/server/models/Users.js - Users Model
  *
  * coded by Tanguy@Team Noix
  * started at 08/02/2019
