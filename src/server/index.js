@@ -17,6 +17,7 @@ const app = express();
 
 // Import App Routers
 const usersRouter = require("./routes/users.js");
+const booksRouter = require("./routes/books.js");
 
 /*
  * Connection to database
@@ -47,8 +48,9 @@ app.use(express.urlencoded());
 
 // Routing middlewares
 app.use("/api/users", usersRouter);
+app.use("/api/books", booksRouter);
 
-// Login/logout middlewares
+// Authentication middlewares
 
 /* ------ */
 

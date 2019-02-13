@@ -49,6 +49,16 @@ router.post("/", (req, res) => {
     // Users Store
     console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
 
+    if (
+        !req.body.password ||
+        !req.body.pseudo ||
+        !req.body.isCoach ||
+        !req.body.email
+    ) {
+        console.log("Missing informations to create user");
+        res.send("Missing informations to create user");
+    }
+
     const user = {
         isCoach: req.body.isCoach,
         pseudo: req.body.pseudo,
