@@ -142,7 +142,9 @@ router.delete("/:user", (req, res) => {
 router.post("/login", (req, res) => {
     // Users Login
     console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+    res.send("User login route not functionnal yet. Please try again later");
 
+    /*
     if (!req.body.email || !req.body.password) {
         console.error("Please fill all field");
         res.send("Please fill all fields");
@@ -161,8 +163,13 @@ router.post("/login", (req, res) => {
             console.error(error);
             res.send(error);
         });
+    */
 });
 
-// Users Logout
+router.get("/logout", (req, res) => {
+    // Users Logout
+    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+    res.send("User logout route not functionnal yet. Please try again later");
+});
 
 module.exports = router;
