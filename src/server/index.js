@@ -44,6 +44,16 @@ const db = mongoose.connection;
 /*
  * Middlewares stack
  */
+// CORS bugfixes middlewares (allow way too much, should be tightened for production)
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept",
+    );
+    next();
+});
+
 // Requests middlewares
 app.use(express.json());
 app.use(express.urlencoded());
