@@ -10,8 +10,9 @@ import express from "express";
 import bcrypt from "bcryptjs";
 const router = new express.Router();
 
-// Import Mongoose Model
+// Import Mongoose Models
 import Users from "../models/Users.js";
+import Wishlists from "../models/Wishlists.js";
 
 router.get("/", (req, res) => {
     // Users Index
@@ -155,6 +156,82 @@ router.delete("/:user", (req, res) => {
 
         console.log(`${result.pseudo} deleted from database`);
         res.send(`${result.pseudo} deleted from database`);
+    });
+});
+
+router.get("/:user/wishlists", (req, res) => {
+    // Users' Wishlist Index
+    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+
+    Wishlists.find()
+        .then(wishes => {
+            res.json(wishes);
+        })
+        .catch(error => {
+            console.error(error);
+            res.send(error);
+        });
+});
+
+router.get("/:user/wishlists/:wish", (req, res) => {
+    // Users' Wishlist Show
+    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+
+    Wishlists.findOne({_id: req.params.wish})
+        .then(wish => {
+            res.json(wish);
+        })
+        .catch(error => {
+            console.error(error);
+            res.send(error);
+        });
+});
+
+router.post("/:user/wishlists", (req, res) => {
+    // Users' Wishlist Store
+    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+
+    if (!req.params.user || !req.body.book_id) {
+        console.log("Missing informations to add book to user's wishlist");
+        res.send("Missing informations to add book to user's wishlist");
+        return;
+    }
+
+    const wish = {
+        user_id: req.params.user,
+        book_id: req.body.book_id,
+    };
+
+    Wishlists.create(wish)
+        .then(result => {
+            console.log("Wishlist saved to database.");
+            res.json(result);
+        })
+        .catch(error => {
+            console.error(error);
+            res.send(error);
+        });
+});
+
+router.delete("/:user/wishlists/:wish", (req, res) => {
+    // Users' Wishlist Delete
+    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+
+    Wishlists.findOneAndDelete({_id: req.params.wish}, (error, result) => {
+        if (error) {
+            console.error(error);
+            res.send(error);
+            return;
+        }
+
+        if (result === null) {
+            console.error("Wishlist not found");
+            res.send("Wishlist not found");
+            return;
+        }
+
+        console.log("Wishlist deleted from database");
+        res.send("Wishlist deleted from database");
     });
 });
 
