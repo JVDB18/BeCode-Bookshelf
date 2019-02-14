@@ -1,20 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-no-literals */
 import React from "react";
-import {Route, NavLink} from "react-router-dom";
-import BorrowingsHistory from "./BorrowingsHistory";
 
-export default class BooksDetails extends React.Component {
-    render() {
-        return (
-            <div>
-                I'M BooksDetails COMPONENT
-                <Route
-                    path="/home/book/:id/history"
-                    component={BorrowingsHistory}
-                />
-                <NavLink to="/home/book/:id/history">BorrowingsHistory</NavLink>
-            </div>
-        );
-    }
-}
+const BooksDetails = props => {
+    console.log(props);
+    //     console.log(match, match.params.id);
+    return (
+        <div>
+            <h3>Books ID: {props.match.params.id}</h3>
+            <h3>
+                {props.id} - {props.title}
+            </h3>
+        </div>
+    );
+};
+
+export default BooksDetails;

@@ -4,6 +4,6 @@ import React from "react";
 
 export default class BorrowingsHistory extends React.Component {
     render() {
-        return <div>I'M BorrowingsHistory COMPONENT</div>;
+        return <div>I'M BorrowingsHistory COMPOMENT</div>;
     }
 }
