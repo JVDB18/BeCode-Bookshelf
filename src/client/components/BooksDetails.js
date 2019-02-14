@@ -3,11 +3,10 @@
 import React from "react";
 
 const BooksDetails = props => {
-    console.log(props);
-    //     console.log(match, match.params.id);
+    // const showHideClassName = show ? "display-block" : "display-none";
     return (
         <div>
-            <h3>Books ID: {props.match.params.id}</h3>
+            <h3>Books ID: {props.id}</h3>
             <h3>
                 {props.id} - {props.title}
             </h3>
