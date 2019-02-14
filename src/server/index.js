@@ -12,6 +12,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import path from "path";
+import cors from "cors";
 const {APP_PORT} = process.env;
 const app = express();
 
@@ -45,14 +46,7 @@ const db = mongoose.connection;
  * Middlewares stack
  */
 // CORS bugfixes middlewares (allow way too much, should be tightened for production)
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept",
-    );
-    next();
-});
+app.use(cors());
 
 // Requests middlewares
 app.use(express.json());
