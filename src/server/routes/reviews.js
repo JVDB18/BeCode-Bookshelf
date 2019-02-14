@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:review", (req, res) => {
-    // Books Show
+    // Reviews Show
     console.log(`ℹ️  (${req.method.toUpperCase()}) /api/reviews${req.url}`);
 
     Reviews.findOne({_id: req.params.review})

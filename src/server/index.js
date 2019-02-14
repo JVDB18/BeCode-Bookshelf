@@ -19,6 +19,7 @@ const app = express();
 const usersRouter = require("./routes/users.js");
 const booksRouter = require("./routes/books.js");
 const reviewsRouter = require("./routes/reviews.js");
+const borrowedsRouter = require("./routes/borroweds.js");
 
 /*
  * Connection to database
@@ -51,6 +52,7 @@ app.use(express.urlencoded());
 app.use("/api/users", usersRouter);
 app.use("/api/books", booksRouter);
 app.use("/api/reviews", reviewsRouter);
+app.use("/api/borroweds", borrowedsRouter);
 
 // Authentication middlewares
 
