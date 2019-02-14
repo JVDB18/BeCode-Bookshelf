@@ -9,8 +9,8 @@
 import mongoose from "mongoose";
 
 const borrowedSchema = new mongoose.Schema({
-    user_id: mongoose.Schema.ObjectId,
-    book_id: mongoose.Schema.ObjectId,
+    user_id: mongoose.Schema.Types.ObjectId,
+    book_id: mongoose.Schema.Types.ObjectId,
     borrowed_date: Number,
     returned_date: Number,
 });

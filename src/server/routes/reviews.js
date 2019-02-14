@@ -6,6 +6,7 @@
  * started at 13/02/2019
  */
 
+import mongoose from "mongoose";
 import express from "express";
 const router = new express.Router();
 
@@ -56,8 +57,8 @@ router.post("/", (req, res) => {
     }
 
     const review = {
-        user_id: req.body.user_id,
-        book_id: req.body.book_id,
+        user_id: new mongoose.Types.ObjectId(req.body.user_id),
+        book_id: new mongoose.Types.ObjectId(req.body.book_id),
         stars: req.body.stars,
         commentary: req.body.commentary,
         created_at: Date.now(),

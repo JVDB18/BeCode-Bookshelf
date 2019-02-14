@@ -6,6 +6,7 @@
  * started at 13/02/2019
  */
 
+import mongoose from "mongoose";
 import express from "express";
 import bcrypt from "bcryptjs";
 const router = new express.Router();
@@ -13,6 +14,7 @@ const router = new express.Router();
 // Import Mongoose Models
 import Users from "../models/Users.js";
 import Wishlists from "../models/Wishlists.js";
+import Borroweds from "../models/Borroweds.js";
 
 router.get("/", (req, res) => {
     // Users Index
@@ -159,6 +161,20 @@ router.delete("/:user", (req, res) => {
     });
 });
 
+router.get("/:user/borroweds", (req, res) => {
+    // Users' Borroweds Index
+    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+
+    Borroweds.find({user_id: req.params.user}, (error, borrows) => {
+        if (error) {
+            console.error(error);
+            res.send(error);
+            return;
+        }
+        res.json(borrows);
+    });
+});
+
 router.get("/:user/wishlists", (req, res) => {
     // Users' Wishlist Index
     console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
@@ -198,8 +214,8 @@ router.post("/:user/wishlists", (req, res) => {
     }
 
     const wish = {
-        user_id: req.params.user,
-        book_id: req.body.book_id,
+        user_id: new mongoose.Types.ObjectId(req.params.user),
+        book_id: new mongoose.Types.ObjectId(req.body.book_id),
     };
 
     Wishlists.create(wish)

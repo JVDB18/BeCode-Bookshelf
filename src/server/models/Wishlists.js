@@ -12,8 +12,8 @@ import mongoose from "mongoose";
  * Mongoose's Wishlist Schema & Model definition
  */
 const wishlistSchema = new mongoose.Schema({
-    user_id: mongoose.Schema.ObjectId,
-    book_id: mongoose.Schema.ObjectId,
+    user_id: mongoose.Schema.Types.ObjectId,
+    book_id: mongoose.Schema.Types.ObjectId,
 });
 const Wishlists = mongoose.model("Wishlists", wishlistSchema, "wishlists"); // model( 'model name', schema, 'collection name' )
 

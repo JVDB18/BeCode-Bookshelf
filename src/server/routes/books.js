@@ -11,6 +11,7 @@ const router = new express.Router();
 
 // Import Mongoose Model
 import Books from "../models/Books.js";
+import Borroweds from "../models/Borroweds.js";
 
 router.get("/", (req, res) => {
     // Books index
@@ -143,6 +144,20 @@ router.delete("/:book", (req, res) => {
 
         console.log(`\"${result.title}\" deleted from database`);
         res.send(`\"${result.title}\" deleted from database`);
+    });
+});
+
+router.get("/:book/borroweds", (req, res) => {
+    // Books' Borroweds Index
+    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/books${req.url}`);
+
+    Borroweds.find({book_id: req.params.book}, (error, borrows) => {
+        if (error) {
+            console.error(error);
+            res.send(error);
+            return;
+        }
+        res.json(borrows);
     });
 });
 

@@ -9,8 +9,8 @@
 import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema({
-    user_id: mongoose.Schema.ObjectId,
-    book_id: mongoose.Schema.ObjectId,
+    user_id: mongoose.Schema.Types.ObjectId,
+    book_id: mongoose.Schema.Types.ObjectId,
     stars: Number,
     commentary: String,
     created_at: Number,
