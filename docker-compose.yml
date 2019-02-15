@@ -9,7 +9,7 @@
         DB_NAME: "bookshelf"
         DB_USERNAME: "dev"
         DB_PASSWORD: "dev"
-        DB_URL: "mongo"
+        DB_HOST: "mongo"
         DB_PORT: "27017"
       volumes:
         - "./package.json:/src/app/package.json"
