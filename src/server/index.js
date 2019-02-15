@@ -45,7 +45,7 @@ const db = mongoose.connection;
 /*
  * Middlewares stack
  */
-// CORS bugfixes middlewares (allow way too much, should be tightened for production)
+// Cross-Origin middleware
 app.use(cors());
 
 // Requests middlewares
