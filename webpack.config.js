@@ -105,9 +105,7 @@ module.exports = env => {
                 },
             ],
         },
-        devServer: {
-            historyApiFallback: true,
-          },
+        watch: env === 'dev',
         plugins,
         optimization,
         performance: {hints: false},

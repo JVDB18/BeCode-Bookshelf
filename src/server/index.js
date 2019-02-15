@@ -2,7 +2,7 @@
  *
  * /src/server/index.js - Server entry point
  *
- * coded by leny@BeCode
+ * coded by leny@BeCode & Tanguy@Team Noix
  * started at 18/01/2019
  */
 
