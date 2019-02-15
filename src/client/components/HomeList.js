@@ -14,12 +14,29 @@ export default class HomeList extends React.Component {
             show: false,
         };
         this.showModal = this.showModal.bind(this);
-        this.data = this.data.bind(this);
+        this.tamere = this.tamere.bind(this);
+        // this.data = this.data.bind(this);
         // eslint-disable-next-line no-shadow
         // this.books declared as a variable
     }
     componentDidMount() {
-        this.data();
+        const uri = "http://localhost:80/api/books";
+
+        Axios.get(uri, {crossdomain: true})
+            .then(response => {
+                console.log(response.data);
+                this.setState({books: response.data});
+                console.log(this.state.books);
+                console.log("hello");
+            })
+            .then(() => {
+                this.tamere();
+            });
+    }
+    tamere() {
+        // this.data();
+        // console.log(this.books);
+        console.log("prout");
         this.books = this.state.books.map(book => {
             return (
                 <div key={book.id}>
@@ -34,18 +51,11 @@ export default class HomeList extends React.Component {
                 </div>
             );
         });
+        console.log(this.books);
     }
     showModal() {
         this.setState({
             show: true,
-        });
-    }
-    data() {
-        const uri = "http://localhost:80/api/books";
-
-        Axios.get(uri, {crossdomain: true}).then(response => {
-            console.log(response.data);
-            this.setState.books = response.data;
         });
     }
     render() {

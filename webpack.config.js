@@ -105,7 +105,7 @@ module.exports = env => {
                 },
             ],
         },
-        watch: env === "dev",
+        watch: env === 'dev',
         plugins,
         optimization,
         performance: {hints: false},
