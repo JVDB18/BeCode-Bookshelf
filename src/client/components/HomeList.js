@@ -2,7 +2,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-no-literals */
 import * as React from "react";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import BooksDetails from "./BooksDetails.js";
 import Axios from "axios";
 
@@ -64,6 +64,9 @@ export default class HomeList extends React.Component {
                 Blabla
                 {/* return the new this.books variable */}
                 <ul>{this.books}</ul>
+                <NavLink to="/home/add">
+                    <button>OK</button>
+                </NavLink>
             </div>
         );
     }
