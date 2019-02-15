@@ -17,6 +17,12 @@ const Nav = () => {
                 <NavLink to="/admin" activeClassName="selected">
                     Admin
                 </NavLink>
+                <NavLink to="/login" activeClassName="selected">
+                    Login
+                </NavLink>
+                <NavLink to="/BooksCreation" activeClassName="selected">
+                    BooksCreation
+                </NavLink>
             </nav>
         </div>
     );
