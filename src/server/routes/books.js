@@ -12,6 +12,7 @@ const router = new express.Router();
 // Import Mongoose Model
 import Books from "../models/Books.js";
 import Borroweds from "../models/Borroweds.js";
+import Reviews from "../models/Reviews.js";
 
 router.get("/", (req, res) => {
     // Books index
@@ -158,6 +159,20 @@ router.get("/:book/borroweds", (req, res) => {
             return;
         }
         res.json(borrows);
+    });
+});
+
+router.get("/:book/reviews", (req, res) => {
+    // Book's Reviews Index
+    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+
+    Reviews.find({book_id: req.params.book}, (error, reviews) => {
+        if (error) {
+            console.error(error);
+            res.send(error);
+            return;
+        }
+        res.json(reviews);
     });
 });
 
