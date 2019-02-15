@@ -41,9 +41,10 @@ export default class HomeList extends React.Component {
         });
     }
     data() {
-        const uri = "localhost:8080/api/books";
+        const uri = "http://localhost:80/api/books";
 
         Axios.get(uri, {crossdomain: true}).then(response => {
+            console.log(response.data);
             this.setState.books = response.data;
         });
     }
