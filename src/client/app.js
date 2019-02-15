@@ -11,6 +11,10 @@ import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import Routes from "./components/Routes";
 import Nav from "./components/NavLinks";
+import "./styles/app.scss";
+
+// import './styles/app.css';
+// import './styles/appStyles.scss';
 
 ReactDOM.render(
     <BrowserRouter>

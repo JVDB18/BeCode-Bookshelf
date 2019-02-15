@@ -12,6 +12,7 @@ const webpack = require("webpack");
 const {resolve} = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+
 module.exports = env => {
     const plugins = [
         new webpack.EnvironmentPlugin({
@@ -61,6 +62,18 @@ module.exports = env => {
         entry: ["./app.js"],
         module: {
             rules: [
+                {
+                    test: /\.scss$/,
+                    use: [
+                        "style-loader", // creates style nodes from JS strings
+                        "css-loader", // translates CSS into CommonJS
+                        "sass-loader", // compiles Sass to CSS, using Node Sass by default
+                    ],
+                },
+                {
+                    test: /\.css$/,
+                    use: ["style-loader", "css-loader"],
+                },
                 {
                     test: /\.(png|jpg|gif)$/,
                     use: [
