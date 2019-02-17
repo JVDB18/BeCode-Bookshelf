@@ -1,9 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-no-literals */
 import * as React from "react";
-import {Link} from "react-router-dom";
 import BooksDetails from "./BooksDetails.js";
+import {Link} from "react-router-dom";
 import Axios from "axios";
 
 export default class HomeList extends React.Component {
@@ -11,60 +13,63 @@ export default class HomeList extends React.Component {
         super(props);
         this.state = {
             books: [],
-            show: false,
+            show: "",
         };
-        this.showModal = this.showModal.bind(this);
-        this.tamere = this.tamere.bind(this);
-        // this.data = this.data.bind(this);
+        this.handleclick = this.handleclick.bind(this);
         // eslint-disable-next-line no-shadow
-        // this.books declared as a variable
+    }
+
+    handleclick() {
+        if (this.state.show === false){
+            this.setState({
+                show: true,
+            });
+        }
+        else {
+            this.setState({
+                show: false,
+            })
+        }
     }
     componentDidMount() {
         const uri = "http://localhost:80/api/books";
 
-        Axios.get(uri, {crossdomain: true})
-            .then(response => {
-                console.log(response.data);
-                this.setState({books: response.data});
-                console.log(this.state.books);
-                console.log("hello");
-            })
-            .then(() => {
-                this.tamere();
-            });
-    }
-    tamere() {
-        // this.data();
-        // console.log(this.books);
-        console.log("prout");
-        this.books = this.state.books.map(book => {
-            return (
-                <div key={book.id}>
-                    <Link
-                        to={`/home/books/${book.id}`}
-                        onClick={this.showModal}>
-                        <li>
-                            {book.title} {book.author}
-                        </li>
-                        <BooksDetails title={book.title} id={book.id} />
-                    </Link>
-                </div>
-            );
-        });
-        console.log(this.books);
-    }
-    showModal() {
-        this.setState({
-            show: true,
+        Axios.get(uri, {crossdomain: true}).then(response => {
+            console.log(response.data);
+            this.setState({books: response.data});
+            console.log(this.state.books);
+            console.log("hello");
         });
     }
     render() {
+    if (this.state.books.length === 0){
+        // eslint-disable-next-line react/no-unescaped-entities
+        return <div>"pending"</div>
+    }    
         return (
-            <div>
-                Blabla
-                {/* return the new this.books variable */}
-                <ul>{this.books}</ul>
-            </div>
+            <>
+                <h2>Book's List</h2>
+                <Link to="/home/add">
+                    <button>
+                        Add a book to database 
+                    </button>
+                </Link>
+                <ul>
+                    {this.state.books.map(book => (
+                        <li key={book._id}>
+                                {book.title} {book.author}
+                                <input type="button" onClick={this.handleclick} value="Details"/>
+                                <BooksDetails 
+                                    key={book._id} 
+                                    show={this.state.show}
+                                    isbn={book.isbn}
+                                    language={book.language}
+                                    format={book.format}
+                                />
+                        </li>
+                    ))}
+                    </ul>
+            </>
         );
     }
 }
