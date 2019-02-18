@@ -1,49 +1,93 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-no-literals */
 import React from "react";
-import Axios from "axios";
+import BooksEdit from "./BooksEdit";
+import Reviews from "./Reviews";
 
 export default class BooksDetails extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             show: false,
-            reviews: [],
+            showReviews: false,
+            uri: props.uri,
+            showEdit: false,
+            id: props.id,
+            title: props.title,
+            author: props.author,
+            isbn: props.isbn,
+            language: props.language,
+            format: props.format,
         };
-        this.style = {
-            modal: {
-                backgroundColor: "blue",
-            },
-        };
+        this.handleClickEdit = this.handleClickEdit.bind(this);
     }
-    componentDidMount() {
-        const uri = this.props.uri;
 
-        Axios.get(`${uri}/reviews`, {crossdomaine: true}).then(response => {
-            console.log(response.data);
+    handleClickEdit() {
+        if (this.state.showEdit === false) {
             this.setState({
-                reviews: response.data,
+                showEdit: true,
             });
-        });
+        } else {
+            this.setState({
+                showEdit: false,
+            });
+        }
+    }
+    handleClickReviews() {
+        if (this.state.showReviews === false) {
+            this.setState({
+                showReviews: true,
+            });
+        } else {
+            this.setState({
+                showReviews: false,
+            });
+        }
     }
 
     render() {
         return (
-            <div
-                style={{
-                    ...this.modal,
-                    display: this.props.show ? "block" : "none",
-                }}>
-                <div>
-                    {this.props.children}
-                    Numéro ISBN: {this.props.isbn},
-                    <br />
-                    Langue:{this.props.language},
-                    <br />
-                    Format: {this.props.format},
-                    <br />
+            <>
+                <div
+                    style={{
+                        display: this.props.show ? "block" : "none",
+                    }}>
+                    <input
+                        type="button"
+                        value="Edit"
+                        onClick={this.handleClickEdit}
+                    />
+                    <BooksEdit
+                        uri={this.state.uri}
+                        id={this.state.id}
+                        title={this.state.title}
+                        author={this.state.author}
+                        isbn={this.state.isbn}
+                        language={this.state.language}
+                        format={this.state.format}
+                        showEdit={this.state.showEdit}
+                    />
+                    <input
+                        type="button"
+                        value="Reviews"
+                        onClick={this.handleClickReviews}
+                    />
+                    <Reviews
+                        uri={this.state.uri}
+                        id={this.state.id}
+                        showReviews={this.state.showReviews}
+                    />
+                    <div>
+                        {this.props.children}
+                        Numéro ISBN: {this.props.isbn},
+                        <br />
+                        Langue:{this.props.language},
+                        <br />
+                        Format: {this.props.format},
+                        <br />
+                    </div>
                 </div>
-            </div>
+            </>
         );
     }
 }
