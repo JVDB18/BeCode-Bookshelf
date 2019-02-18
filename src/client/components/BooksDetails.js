@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-literals */
 import React from "react";
 import BooksEdit from "./BooksEdit";
-import Reviews from "./Reviews";
+// import Reviews from "./Reviews";
 
 export default class BooksDetails extends React.Component {
     constructor(props) {
@@ -72,11 +72,11 @@ export default class BooksDetails extends React.Component {
                         value="Reviews"
                         onClick={this.handleClickReviews}
                     />
-                    <Reviews
+                    {/* <Reviews
                         uri={this.state.uri}
                         id={this.state.id}
                         showReviews={this.state.showReviews}
-                    />
+                    /> */}
                     <div>
                         {this.props.children}
                         Numéro ISBN: {this.props.isbn},
