@@ -46,7 +46,7 @@ export const authMiddleware = function(request, response, next) {
 };
 
 export default {
-    verifyJWTToken,
-    createJWToken,
+    verifyToken,
+    createToken,
     authMiddleware,
 };
