@@ -1,6 +1,6 @@
-/* eslint-disable react/jsx-no-literals */
+// /* eslint-disable react/jsx-no-literals */
 // import React from "react";
-// import axios from "axios";
+// import Axios from "axios";
 
 // export default class Reviews extends React.Component {
 //     constructor(props) {
@@ -14,20 +14,19 @@
 //             comment: "",
 //         };
 //     }
-//     componentDidMount() {
+//     componentWillMount() {
 //         const uri = this.state.uri;
 //         const id = this.state.id;
 
-//         axios
-//             .get(`${uri}/reviews/book_${id}`, {crossdomaine: true})
-//             .then(response => {
-//                 this.setState({
-//                     reviews: response.data,
-//                 });
-//             });
+//         Axios.get(`${uri}/reviews`, {crossdomain: true}).then(response => {
+//             console.log(response.data);
+//             this.setState({reviews: response.data});
+//             console.log(this.state.reviews);
+//         });
 //     }
 //     render() {
 //         if (this.state.reviews.length === 0) {
+//             // eslint-disable-next-line react/no-unescaped-entities
 //             return <>Pending...</>;
 //         }
 //         return (

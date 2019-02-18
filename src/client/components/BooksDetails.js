@@ -67,11 +67,11 @@ export default class BooksDetails extends React.Component {
                         format={this.state.format}
                         showEdit={this.state.showEdit}
                     />
-                    <input
+                    {/* <input
                         type="button"
                         value="Reviews"
                         onClick={this.handleClickReviews}
-                    />
+                    /> */}
                     {/* <Reviews
                         uri={this.state.uri}
                         id={this.state.id}
