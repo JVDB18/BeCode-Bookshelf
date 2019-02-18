@@ -32,7 +32,7 @@ export const createToken = function(sessionData) {
 
 export const authMiddleware = function(request, response, next) {
     // get token from localstorage
-    let token = localstorage.getItem("bookshelf_token");
+    let token = req.body.token;
 
     verifyToken(token)
         .then(decodedToken => {
@@ -46,7 +46,7 @@ export const authMiddleware = function(request, response, next) {
 };
 
 export default {
-    verifyJWTToken,
-    createJWToken,
+    verifyToken,
+    createToken,
     authMiddleware,
 };

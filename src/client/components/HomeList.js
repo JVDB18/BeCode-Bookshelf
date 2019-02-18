@@ -61,8 +61,10 @@ export default class HomeList extends React.Component {
                                 {book.title} {book.author}
                                 <input type="button" onClick={this.handleclick} value="Details"/>
                                 <BooksDetails 
-                                    key={book._id} 
+                                    id={book._id} 
                                     show={this.state.show}
+                                    title={book.title}
+                                    author={book.author}
                                     isbn={book.isbn}
                                     language={book.language}
                                     format={book.format}

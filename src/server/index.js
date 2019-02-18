@@ -13,6 +13,7 @@ import express from "express";
 import mongoose from "mongoose";
 import path from "path";
 import cors from "cors";
+import {createToken} from "./authentication.js";
 const {APP_PORT} = process.env;
 const app = express();
 
@@ -102,8 +103,8 @@ db.once("open", () => {
                 });
                 // Stock token in localstorage
 
-                localstorage.setItem("bookshelf_token", token);
-                console.log("Successfully logged in");
+                // localstorage.setItem("bookshelf_token", token);
+                console.log("Successfully generated token");
                 res.json(token);
                 return;
             })
@@ -118,9 +119,18 @@ db.once("open", () => {
         // Users Logout
         console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
         // clear token from localstorage
-        localstorage.removeItem("bookshelf_token");
+        // localstorage.removeItem("bookshelf_token");
         console.log("Successfully logged out");
         res.json("Successfully logged out");
+        return;
+    });
+
+    /*
+     * Catch-all route
+     */
+    app.all("*", (req, res) => {
+        console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+        res.render("../index.html");
         return;
     });
 
