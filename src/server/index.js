@@ -126,6 +126,15 @@ db.once("open", () => {
     });
 
     /*
+     * Catch-all route
+     */
+    app.all("*", (req, res) => {
+        console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+        res.render("../index.html");
+        return;
+    });
+
+    /*
      * Initiate Express
      */
     app.listen(APP_PORT, () =>
