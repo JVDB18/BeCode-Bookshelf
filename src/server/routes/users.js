@@ -11,10 +11,15 @@ import express from "express";
 import bcrypt from "bcryptjs";
 const router = new express.Router();
 
+import {authMiddleware} from "../authentication.js";
+
 // Import Mongoose Models
 import Users from "../models/Users.js";
 import Wishlists from "../models/Wishlists.js";
 import Borroweds from "../models/Borroweds.js";
+
+// Require Authentication on all routes
+router.get("*", authMiddleware);
 
 router.get("/", (req, res) => {
     // Users Index
@@ -83,6 +88,7 @@ router.post("/", (req, res) => {
         });
 });
 
+/*
 router.get("/:user/edit", (req, res) => {
     // Users Edit
     console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
@@ -96,6 +102,7 @@ router.get("/:user/edit", (req, res) => {
             res.send(error);
         });
 });
+*/
 
 router.put("/:user", (req, res) => {
     // Users Update
@@ -249,39 +256,6 @@ router.delete("/:user/wishlists/:wish", (req, res) => {
         console.log("Wishlist deleted from database");
         res.send("Wishlist deleted from database");
     });
-});
-
-router.post("/login", (req, res) => {
-    // Users Login
-    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
-    res.send("User login route not functionnal yet. Please try again later");
-
-    /*
-    if (!req.body.email || !req.body.password) {
-        console.error("Please fill all field");
-        res.send("Please fill all fields");
-    }
-
-    Users.findOne({email: req.body.email})
-        .then(user => {
-            if (!bcrypt.compareSync(req.body.password, user.password)) {
-                console.error("Email or password invalid");
-                res.send("Email or password invalid");
-            }
-
-            // Else, connect
-        })
-        .catch(error => {
-            console.error(error);
-            res.send(error);
-        });
-    */
-});
-
-router.get("/logout", (req, res) => {
-    // Users Logout
-    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
-    res.send("User logout route not functionnal yet. Please try again later");
 });
 
 module.exports = router;

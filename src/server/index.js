@@ -57,9 +57,6 @@ app.use("/api/users", usersRouter);
 app.use("/api/books", booksRouter);
 app.use("/api/reviews", reviewsRouter);
 app.use("/api/borroweds", borrowedsRouter);
-
-// Authentication middlewares
-
 /* ------ */
 
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
@@ -74,6 +71,57 @@ db.once("open", () => {
     app.get("/hello", (req, res) => {
         console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
         res.send("Hello, World!");
+    });
+
+    /*
+     * Login / Logout Routes
+     */
+    app.post("/login", (req, res) => {
+        // Users Login
+        console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+
+        if (!req.body.email || !req.body.password) {
+            console.error("Please fill all field");
+            res.send("Please fill all fields");
+            return;
+        }
+
+        Users.findOne({email: req.body.email})
+            .then(user => {
+                if (!bcrypt.compareSync(req.body.password, user.password)) {
+                    console.error("Email or password invalid");
+                    res.send("Email or password invalid");
+                    return;
+                }
+
+                // Else, connect
+                // Create JWToken
+                let token = createToken({
+                    _id: user._id,
+                    pseudo: user.pseudo,
+                });
+                // Stock token in localstorage
+
+                localstorage.setItem("bookshelf_token", token);
+                console.log("Successfully logged in");
+                res.json(token);
+                return;
+            })
+            .catch(error => {
+                console.error(error);
+                res.send(error);
+                return;
+            });
+    });
+
+    app.get("/logout", (req, res) => {
+        // Users Logout
+        console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+        // clear token from localstorage
+        localstorage.removeItem("bookshelf_token");
+        console.log("Successfully logged out");
+        res.json("Successfully logged out");
+        return;
     });
 
     /*

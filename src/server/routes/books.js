@@ -7,12 +7,16 @@
  */
 
 import express from "express";
+import {authMiddleware} from "../authentication.js";
 const router = new express.Router();
 
 // Import Mongoose Model
 import Books from "../models/Books.js";
 import Borroweds from "../models/Borroweds.js";
 import Reviews from "../models/Reviews.js";
+
+// Require Authentication on all routes
+router.all("*", authMiddleware);
 
 router.get("/", (req, res) => {
     // Books index
@@ -73,6 +77,7 @@ router.post("/", (req, res) => {
         });
 });
 
+/*
 router.get("/:book/edit", (req, res) => {
     // Books Edit
     console.log(`ℹ️  (${req.method.toUpperCase()}) /api/books${req.url}`);
@@ -86,6 +91,7 @@ router.get("/:book/edit", (req, res) => {
             res.send(error);
         });
 });
+*/
 
 router.put("/:book", (req, res) => {
     // Book Update

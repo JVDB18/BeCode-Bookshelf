@@ -8,10 +8,14 @@
 
 import mongoose from "mongoose";
 import express from "express";
+import {authMiddleware} from "../authentication.js";
 const router = new express.Router();
 
 // Import Mongoose Model
 import Borroweds from "../models/Borroweds.js";
+
+// Require Authentication on all routes
+router.all("*", authMiddleware);
 
 router.get("/", (req, res) => {
     // Borroweds Index
@@ -69,6 +73,7 @@ router.post("/", (req, res) => {
         });
 });
 
+/*
 router.get("/:borrowed/edit", (req, res) => {
     // Borroweds Edit
     console.log(`ℹ️  (${req.method.toUpperCase()}) /api/borroweds${req.url}`);
@@ -82,6 +87,7 @@ router.get("/:borrowed/edit", (req, res) => {
             res.send(error);
         });
 });
+*/
 
 router.put("/:borrowed", (req, res) => {
     // Borroweds Update
