@@ -1,12 +1,10 @@
 import React from "react";
 import axios from "axios";
 
-export default class UsersEdit extends React.Component {
+export default class BooksEdit extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // get info from database to render the user => then via axios, edit the info
-
             title: props.title,
             author: props.author,
             isbn: props.isbn,
@@ -69,7 +67,7 @@ export default class UsersEdit extends React.Component {
                         value={this.state.format}
                         name="format"
                         onChange={this.changeFormat}
-                        defaultformat={ŧhis.state.format}
+                        defaultformat={this.state.format}
                     />
 
                     <input type="submit" value="Send" />

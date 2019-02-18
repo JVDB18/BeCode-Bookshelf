@@ -5,8 +5,8 @@
 /* eslint-disable react/jsx-no-literals */
 import * as React from "react";
 import BooksDetails from "./BooksDetails.js";
-import {Link} from "react-router-dom";
 import Axios from "axios";
+import BooksAdd from "./BooksAdd";
 
 export default class HomeList extends React.Component {
     constructor(props) {
@@ -14,9 +14,11 @@ export default class HomeList extends React.Component {
         this.state = {
             books: [],
             show: "",
-            uri: "http://localhost/api"
+            uri: "http://localhost/api",
+            showAdd: false,
         };
         this.handleclick = this.handleclick.bind(this);
+        this.handleShowAdd= this.handleShowAdd.bind(this);
         // eslint-disable-next-line no-shadow
     }
 
@@ -29,6 +31,18 @@ export default class HomeList extends React.Component {
         else {
             this.setState({
                 show: false,
+            })
+        }
+    }
+    handleShowAdd() {
+        if (this.state.showAdd === false){
+            this.setState({
+                showAdd: true,
+            });
+        }
+        else {
+            this.setState({
+                showAdd: false,
             })
         }
     }
@@ -50,11 +64,8 @@ export default class HomeList extends React.Component {
         return (
             <>
                 <h2>Book's List</h2>
-                <Link to="/home/add">
-                    <button>
-                        Add a book to database 
-                    </button>
-                </Link>
+                <input type="button" value="Add Book" onClick={this.handleShowAdd} />
+                <BooksAdd showAdd={this.state.showAdd} uri={this.state.uri}/>
                 <ul>
                     {this.state.books.map(book => (
                         <li key={book._id}>
