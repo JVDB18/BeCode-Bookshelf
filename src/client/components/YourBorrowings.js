@@ -12,7 +12,7 @@ export default class YourBorrowings extends React.Component {
         };
     }
     componentDidMount() {
-        const uri = "http://localhost:80/api/";
+        const uri = "http://localhost/api/";
 
         Axios.get(`${uri}borroweds`, {crossdomain: true})
             .then(response => {
@@ -21,7 +21,7 @@ export default class YourBorrowings extends React.Component {
                 console.log(this.state.borrowings);
             })
             .then(
-                Axios.get(`${uri}books/${this.state.borrowings.book_id}`, {
+                Axios.get(`${uri}users/${this.state.borrowings.users_id}`, {
                     crossdomain: true,
                 }).then(response => {
                     this.setState({

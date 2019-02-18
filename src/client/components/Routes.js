@@ -8,7 +8,6 @@ import YourBorrowings from "./YourBorrowings";
 import BooksCrudModal from "./BooksCrudModal";
 import BooksDetails from "./BooksDetails";
 import BorrowingsHistory from "./BorrowingsHistory";
-import UsersCrudModal from "./UsersCrudModal";
 
 const Routes = () => (
     <div>
@@ -22,8 +21,6 @@ const Routes = () => (
             <Route path="/yourborrowings" component={YourBorrowings} />
             <Route path="/admin" component={AdminUsers} />
             <Route path="/home/book/history" component={BorrowingsHistory} />
-            <Route path="/admin/add" component={UsersCrudModal} />
-            <Route path="/admin/edit" component={UsersCrudModal} />
         </Switch>
     </div>
 );

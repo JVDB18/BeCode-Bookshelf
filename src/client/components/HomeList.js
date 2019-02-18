@@ -14,6 +14,7 @@ export default class HomeList extends React.Component {
         this.state = {
             books: [],
             show: "",
+            uri: "http://localhost/api"
         };
         this.handleclick = this.handleclick.bind(this);
         // eslint-disable-next-line no-shadow
@@ -32,9 +33,9 @@ export default class HomeList extends React.Component {
         }
     }
     componentDidMount() {
-        const uri = "http://localhost:80/api/books";
+        const uri = this.state.uri;
 
-        Axios.get(uri, {crossdomain: true}).then(response => {
+        Axios.get(`${uri}/books`, {crossdomain: true}).then(response => {
             console.log(response.data);
             this.setState({books: response.data});
             console.log(this.state.books);
@@ -44,7 +45,7 @@ export default class HomeList extends React.Component {
     render() {
     if (this.state.books.length === 0){
         // eslint-disable-next-line react/no-unescaped-entities
-        return <div>"pending"</div>
+        return <>Pending...</>
     }    
         return (
             <>
@@ -65,6 +66,7 @@ export default class HomeList extends React.Component {
                                     isbn={book.isbn}
                                     language={book.language}
                                     format={book.format}
+                                    uri={this.state.uri}
                                 />
                         </li>
                     ))}
