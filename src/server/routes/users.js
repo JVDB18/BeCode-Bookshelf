@@ -11,7 +11,7 @@ import express from "express";
 import bcrypt from "bcryptjs";
 const router = new express.Router();
 
-import {authMiddleware} from "../authentication.js";
+// import {authMiddleware} from "../authentication.js";
 
 // Import Mongoose Models
 import Users from "../models/Users.js";
@@ -19,7 +19,7 @@ import Wishlists from "../models/Wishlists.js";
 import Borroweds from "../models/Borroweds.js";
 
 // Require Authentication on all routes
-router.get("*", authMiddleware);
+// router.get("*", authMiddleware);
 
 router.get("/", (req, res) => {
     // Users Index

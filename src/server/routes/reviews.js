@@ -8,14 +8,14 @@
 
 import mongoose from "mongoose";
 import express from "express";
-import {authMiddleware} from "../authentication.js";
+// import {authMiddleware} from "../authentication.js";
 const router = new express.Router();
 
 // Import Mongoose Model
 import Reviews from "../models/Reviews.js";
 
 // Require Authentication on all routes
-router.all("*", authMiddleware);
+// router.all("*", authMiddleware);
 
 router.get("/", (req, res) => {
     // Reviews Index
