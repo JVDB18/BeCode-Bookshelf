@@ -1,1 +1,1 @@
-web: node bin/client/index.html
+web: node bin/server/index.js

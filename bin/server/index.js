@@ -8,6 +8,8 @@ var _path = _interopRequireDefault(require("path"));
 
 var _cors = _interopRequireDefault(require("cors"));
 
+var _authentication = require("./authentication.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const {
@@ -67,12 +69,11 @@ db.once("open", () => {
         return;
       }
 
-      let token = createToken({
+      let token = (0, _authentication.createToken)({
         _id: user._id,
         pseudo: user.pseudo
       });
-      localstorage.setItem("bookshelf_token", token);
-      console.log("Successfully logged in");
+      console.log("Successfully generated token");
       res.json(token);
       return;
     }).catch(error => {
@@ -83,9 +84,13 @@ db.once("open", () => {
   });
   app.get("/logout", (req, res) => {
     console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
-    localstorage.removeItem("bookshelf_token");
     console.log("Successfully logged out");
     res.json("Successfully logged out");
+    return;
+  });
+  app.all("*", (req, res) => {
+    console.log(`ℹ️  (${req.method.toUpperCase()}) /api/users${req.url}`);
+    res.render("../index.html");
     return;
   });
   app.listen(APP_PORT, () => console.log(`🚀 Server is listening on port ${APP_PORT}.`));

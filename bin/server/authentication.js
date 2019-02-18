@@ -39,7 +39,7 @@ const createToken = function (sessionData) {
 exports.createToken = createToken;
 
 const authMiddleware = function (request, response, next) {
-  let token = localstorage.getItem("bookshelf_token");
+  let token = req.body.token;
   verifyToken(token).then(decodedToken => {
     request.user = decodedToken.data;
     next();
@@ -51,8 +51,8 @@ const authMiddleware = function (request, response, next) {
 
 exports.authMiddleware = authMiddleware;
 var _default = {
-  verifyJWTToken,
-  createJWToken,
+  verifyToken,
+  createToken,
   authMiddleware
 };
 exports.default = _default;

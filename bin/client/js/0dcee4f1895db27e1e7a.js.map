@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///C:/Users/soult/becode/colline/node/BeCode-Bookshelf/node_modules/axios/index.js"],"names":["module","exports","__webpack_require__"],"mappings":"2EAAAA,EAAAC,QAAiBC,EAAQ","file":"js/0dcee4f1895db27e1e7a.js","sourcesContent":["module.exports = require('./lib/axios');"],"sourceRoot":""}
