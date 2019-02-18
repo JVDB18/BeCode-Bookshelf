@@ -1,8 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-no-literals */
+
 import React from "react";
 
-import axios from "axios";
+// import axios from "axios";
 
 export default class BooksCrudModal extends React.Component {
     constructor(props) {
@@ -27,18 +28,23 @@ export default class BooksCrudModal extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        const NewBook = {
-            Titre: this.state.Titre,
-            Auteur: this.state.Auteur,
-            ISBN: this.state.ISBN,
-            Langue: this.state.Langue,
-            Format: this.state.Format,
-        };
+        // const NewBook = {
+        //     Titre: this.state.Titre,
+        //     Auteur: this.state.Auteur,
+        //     ISBN: this.state.ISBN,
+        //     Langue: this.state.Langue,
+        //     Format: this.state.Format,
+        // };
 
-        axios.post("", {NewBook}).then(res => {
-            console.log(res);
-            console.log(res.data);
-        });
+        // axios
+        //     .post("", {NewBook})
+        //     .then(res => {
+        //         console.log(res);
+        //         console.log(res.data);
+        //     });
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     })
     }
 
     render() {
@@ -48,12 +54,14 @@ export default class BooksCrudModal extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <input
                         name="Titre"
+                        placeholder="Titre"
                         type="text"
                         value={this.state.Titre}
                         onChange={this.handleChange}
                     />
                     <input
                         name="Auteur"
+                        placeholder="Auteur"
                         type="text"
                         value={this.state.Auteur}
                         onChange={this.handleChange}
@@ -61,12 +69,14 @@ export default class BooksCrudModal extends React.Component {
                     <br />
                     <input
                         name="ISBN"
+                        placeholder="ISBN"
                         type="text"
                         value={this.state.ISBN}
                         onChange={this.handleChange}
                     />
                     <input
                         name="Langue"
+                        placeholder="Langue"
                         type="text"
                         value={this.state.Langue}
                         onChange={this.handleChange}
@@ -74,6 +84,7 @@ export default class BooksCrudModal extends React.Component {
                     <br />
                     <input
                         name="Format"
+                        placeholder="Format"
                         type="text"
                         value={this.state.Format}
                         onChange={this.handleChange}
