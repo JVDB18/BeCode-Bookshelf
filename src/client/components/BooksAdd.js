@@ -1,10 +1,8 @@
-/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-no-literals */
 import React from "react";
-
 import axios from "axios";
 
-export default class BooksCrudModal extends React.Component {
+export default class BooksAdd extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,6 +11,8 @@ export default class BooksCrudModal extends React.Component {
             ISBN: "",
             Langue: "",
             Format: "",
+            uri: props.uri,
+            showAdd: false,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,14 +28,15 @@ export default class BooksCrudModal extends React.Component {
         event.preventDefault();
 
         const NewBook = {
-            Titre: this.state.Titre,
-            Auteur: this.state.Auteur,
-            ISBN: this.state.ISBN,
-            Langue: this.state.Langue,
-            Format: this.state.Format,
+            title: this.state.Titre,
+            author: this.state.Auteur,
+            isbn: this.state.ISBN,
+            language: this.state.Langue,
+            format: this.state.Format,
         };
+        const uri = this.state.uri;
 
-        axios.post("", {NewBook}).then(res => {
+        axios.post(`${uri}/books`, NewBook, {crossdomaine: true}).then(res => {
             console.log(res);
             console.log(res.data);
         });
@@ -43,17 +44,22 @@ export default class BooksCrudModal extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Ajoute un livre</h1>
+            <div
+                style={{
+                    display: this.props.showAdd ? "block" : "none",
+                }}>
+                <h1>Add books</h1>
                 <form onSubmit={this.handleSubmit}>
                     <input
                         name="Titre"
+                        placeholder="title"
                         type="text"
                         value={this.state.Titre}
                         onChange={this.handleChange}
                     />
                     <input
                         name="Auteur"
+                        placeholder="author"
                         type="text"
                         value={this.state.Auteur}
                         onChange={this.handleChange}
@@ -61,12 +67,14 @@ export default class BooksCrudModal extends React.Component {
                     <br />
                     <input
                         name="ISBN"
+                        placeholder="ISBN"
                         type="text"
                         value={this.state.ISBN}
                         onChange={this.handleChange}
                     />
                     <input
                         name="Langue"
+                        placeholder="language"
                         type="text"
                         value={this.state.Langue}
                         onChange={this.handleChange}
@@ -74,11 +82,12 @@ export default class BooksCrudModal extends React.Component {
                     <br />
                     <input
                         name="Format"
+                        placeholder="format"
                         type="text"
                         value={this.state.Format}
                         onChange={this.handleChange}
                     />
-                    <input type="submit" value="Ajouter" />
+                    <input type="submit" value="Send" />
                 </form>
             </div>
         );
