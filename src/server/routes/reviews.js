@@ -8,10 +8,14 @@
 
 import mongoose from "mongoose";
 import express from "express";
+import {authMiddleware} from "../authentication.js";
 const router = new express.Router();
 
 // Import Mongoose Model
 import Reviews from "../models/Reviews.js";
+
+// Require Authentication on all routes
+router.all("*", authMiddleware);
 
 router.get("/", (req, res) => {
     // Reviews Index
@@ -76,6 +80,7 @@ router.post("/", (req, res) => {
         });
 });
 
+/*
 router.get("/:review/edit", (req, res) => {
     // Reviews Edit
     console.log(`ℹ️  (${req.method.toUpperCase()}) /api/reviews${req.url}`);
@@ -89,6 +94,7 @@ router.get("/:review/edit", (req, res) => {
             res.send(error);
         });
 });
+*/
 
 router.put("/:review", (req, res) => {
     // Review Update
